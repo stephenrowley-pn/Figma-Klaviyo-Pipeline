@@ -1,0 +1,10 @@
+{
+  "ruleVersion": 1,
+  "componentId": "component:body-text:1",
+  "irShapeHash": "e4d33d6f636fca8c4f99affd6fa43dfb439ac8a16660f381e28ff0ac8cf26494",
+  "blockType": "Text",
+  "textSource": { "kind": "ownCharacters" },
+  "degrade": "none",
+  "provenance": "handwritten",
+  "createdAt": "2026-09-21T00:00:00.000Z"
+}

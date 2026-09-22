@@ -1,0 +1,227 @@
+{
+  "$comment": "GENERATED — run `pnpm schema:generate`. Do not hand-edit.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "ruleVersion": {
+      "type": "number",
+      "const": 1
+    },
+    "componentId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "irShapeHash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "blockType": {
+      "type": "string",
+      "enum": [
+        "Text",
+        "Image",
+        "Button",
+        "Spacer",
+        "Divider",
+        "Html"
+      ]
+    },
+    "textSource": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "ownCharacters"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "childNodeIndex"
+            },
+            "index": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            }
+          },
+          "required": [
+            "kind",
+            "index"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "layerName"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "linkSource": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "styleHyperlink"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "styleOverrideTable"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "interaction"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "layerNameSuffix"
+            },
+            "separator": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "kind",
+            "separator"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "altTextSource": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "ownCharacters"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "childNodeIndex"
+            },
+            "index": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            }
+          },
+          "required": [
+            "kind",
+            "index"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "layerName"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "degrade": {
+      "type": "string",
+      "enum": [
+        "none",
+        "flattenToImage"
+      ]
+    },
+    "degradeReason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "provenance": {
+      "type": "string",
+      "enum": [
+        "handwritten",
+        "llm",
+        "human_edited"
+      ]
+    },
+    "approvedBy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+    }
+  },
+  "required": [
+    "ruleVersion",
+    "componentId",
+    "irShapeHash",
+    "blockType",
+    "degrade",
+    "provenance",
+    "createdAt"
+  ],
+  "additionalProperties": false
+}

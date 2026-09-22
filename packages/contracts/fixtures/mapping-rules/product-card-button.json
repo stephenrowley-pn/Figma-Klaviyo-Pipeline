@@ -1,0 +1,11 @@
+{
+  "ruleVersion": 1,
+  "componentId": "component:product-card-button:1",
+  "irShapeHash": "5409428f280e52f37a57dfdfe13d48234aaa559b69fec60fa7ac1f524cf88c3d",
+  "blockType": "Button",
+  "textSource": { "kind": "childNodeIndex", "index": 1 },
+  "linkSource": { "kind": "layerNameSuffix", "separator": "->" },
+  "degrade": "none",
+  "provenance": "handwritten",
+  "createdAt": "2026-09-21T00:00:00.000Z"
+}

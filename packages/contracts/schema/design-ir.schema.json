@@ -1,0 +1,653 @@
+{
+  "$comment": "GENERATED — run `pnpm schema:generate`. Do not hand-edit.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "irVersion": {
+      "type": "string",
+      "const": "1"
+    },
+    "figmaFileKey": {
+      "type": "string",
+      "minLength": 1
+    },
+    "figmaFileVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rootFigmaNodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "widthPx": {
+      "type": "number",
+      "const": 600
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "figmaNodeId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "backgroundColor": {
+            "type": "string",
+            "pattern": "^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$"
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "figmaNodeId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "columnLayout": {
+                  "type": "string",
+                  "enum": [
+                    "1-column",
+                    "2-column-even",
+                    "2-column-1-2",
+                    "2-column-2-1",
+                    "3-column-even"
+                  ]
+                },
+                "columns": {
+                  "minItems": 1,
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "figmaNodeId": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "widthFraction": {
+                        "type": "number",
+                        "exclusiveMinimum": 0,
+                        "maximum": 1
+                      },
+                      "blocks": {
+                        "type": "array",
+                        "items": {
+                          "oneOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "figmaNodeId": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "style": {
+                                  "type": "object",
+                                  "properties": {
+                                    "color": {
+                                      "type": "string",
+                                      "pattern": "^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$"
+                                    },
+                                    "backgroundColor": {
+                                      "type": "string",
+                                      "pattern": "^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$"
+                                    },
+                                    "fontFamily": {
+                                      "type": "string",
+                                      "minLength": 1
+                                    },
+                                    "fontSizePx": {
+                                      "type": "number",
+                                      "exclusiveMinimum": 0
+                                    },
+                                    "fontWeight": {
+                                      "type": "integer",
+                                      "minimum": 100,
+                                      "maximum": 900
+                                    },
+                                    "lineHeightPx": {
+                                      "type": "number",
+                                      "exclusiveMinimum": 0
+                                    },
+                                    "textAlign": {
+                                      "type": "string",
+                                      "enum": [
+                                        "left",
+                                        "center",
+                                        "right"
+                                      ]
+                                    },
+                                    "paddingTopPx": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 9007199254740991
+                                    },
+                                    "paddingRightPx": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 9007199254740991
+                                    },
+                                    "paddingBottomPx": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 9007199254740991
+                                    },
+                                    "paddingLeftPx": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 9007199254740991
+                                    }
+                                  },
+                                  "additionalProperties": false
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "const": "Text"
+                                },
+                                "text": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "figmaNodeId",
+                                "style",
+                                "type",
+                                "text"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "figmaNodeId": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "style": {
+                                  "type": "object",
+                                  "properties": {
+                                    "color": {
+                                      "type": "string",
+                                      "pattern": "^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$"
+                                    },
+                                    "backgroundColor": {
+                                      "type": "string",
+                                      "pattern": "^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$"
+                                    },
+                                    "fontFamily": {
+                                      "type": "string",
+                                      "minLength": 1
+                                    },
+                                    "fontSizePx": {
+                                      "type": "number",
+                                      "exclusiveMinimum": 0
+                                    },
+                                    "fontWeight": {
+                                      "type": "integer",
+                                      "minimum": 100,
+                                      "maximum": 900
+                                    },
+                                    "lineHeightPx": {
+                                      "type": "number",
+                                      "exclusiveMinimum": 0
+                                    },
+                                    "textAlign": {
+                                      "type": "string",
+                                      "enum": [
+                                        "left",
+                                        "center",
+                                        "right"
+                                      ]
+                                    },
+                                    "paddingTopPx": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 9007199254740991
+                                    },
+                                    "paddingRightPx": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 9007199254740991
+                                    },
+                                    "paddingBottomPx": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 9007199254740991
+                                    },
+                                    "paddingLeftPx": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 9007199254740991
+                                    }
+                                  },
+                                  "additionalProperties": false
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "const": "Image"
+                                },
+                                "src": {
+                                  "type": "string",
+                                  "format": "uri"
+                                },
+                                "altText": {
+                                  "type": "string"
+                                },
+                                "widthPx": {
+                                  "type": "number",
+                                  "exclusiveMinimum": 0
+                                },
+                                "heightPx": {
+                                  "type": "number",
+                                  "exclusiveMinimum": 0
+                                },
+                                "flattenedReason": {
+                                  "type": "string",
+                                  "minLength": 1
+                                }
+                              },
+                              "required": [
+                                "figmaNodeId",
+                                "style",
+                                "type",
+                                "src",
+                                "altText",
+                                "widthPx",
+                                "heightPx"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "figmaNodeId": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "style": {
+                                  "type": "object",
+                                  "properties": {
+                                    "color": {
+                                      "type": "string",
+                                      "pattern": "^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$"
+                                    },
+                                    "backgroundColor": {
+                                      "type": "string",
+                                      "pattern": "^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$"
+                                    },
+                                    "fontFamily": {
+                                      "type": "string",
+                                      "minLength": 1
+                                    },
+                                    "fontSizePx": {
+                                      "type": "number",
+                                      "exclusiveMinimum": 0
+                                    },
+                                    "fontWeight": {
+                                      "type": "integer",
+                                      "minimum": 100,
+                                      "maximum": 900
+                                    },
+                                    "lineHeightPx": {
+                                      "type": "number",
+                                      "exclusiveMinimum": 0
+                                    },
+                                    "textAlign": {
+                                      "type": "string",
+                                      "enum": [
+                                        "left",
+                                        "center",
+                                        "right"
+                                      ]
+                                    },
+                                    "paddingTopPx": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 9007199254740991
+                                    },
+                                    "paddingRightPx": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 9007199254740991
+                                    },
+                                    "paddingBottomPx": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 9007199254740991
+                                    },
+                                    "paddingLeftPx": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 9007199254740991
+                                    }
+                                  },
+                                  "additionalProperties": false
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "const": "Button"
+                                },
+                                "text": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "href": {
+                                  "type": "string",
+                                  "format": "uri"
+                                }
+                              },
+                              "required": [
+                                "figmaNodeId",
+                                "style",
+                                "type",
+                                "text",
+                                "href"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "figmaNodeId": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "style": {
+                                  "type": "object",
+                                  "properties": {
+                                    "color": {
+                                      "type": "string",
+                                      "pattern": "^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$"
+                                    },
+                                    "backgroundColor": {
+                                      "type": "string",
+                                      "pattern": "^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$"
+                                    },
+                                    "fontFamily": {
+                                      "type": "string",
+                                      "minLength": 1
+                                    },
+                                    "fontSizePx": {
+                                      "type": "number",
+                                      "exclusiveMinimum": 0
+                                    },
+                                    "fontWeight": {
+                                      "type": "integer",
+                                      "minimum": 100,
+                                      "maximum": 900
+                                    },
+                                    "lineHeightPx": {
+                                      "type": "number",
+                                      "exclusiveMinimum": 0
+                                    },
+                                    "textAlign": {
+                                      "type": "string",
+                                      "enum": [
+                                        "left",
+                                        "center",
+                                        "right"
+                                      ]
+                                    },
+                                    "paddingTopPx": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 9007199254740991
+                                    },
+                                    "paddingRightPx": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 9007199254740991
+                                    },
+                                    "paddingBottomPx": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 9007199254740991
+                                    },
+                                    "paddingLeftPx": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 9007199254740991
+                                    }
+                                  },
+                                  "additionalProperties": false
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "const": "Spacer"
+                                },
+                                "heightPx": {
+                                  "type": "number",
+                                  "exclusiveMinimum": 0
+                                }
+                              },
+                              "required": [
+                                "figmaNodeId",
+                                "style",
+                                "type",
+                                "heightPx"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "figmaNodeId": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "style": {
+                                  "type": "object",
+                                  "properties": {
+                                    "color": {
+                                      "type": "string",
+                                      "pattern": "^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$"
+                                    },
+                                    "backgroundColor": {
+                                      "type": "string",
+                                      "pattern": "^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$"
+                                    },
+                                    "fontFamily": {
+                                      "type": "string",
+                                      "minLength": 1
+                                    },
+                                    "fontSizePx": {
+                                      "type": "number",
+                                      "exclusiveMinimum": 0
+                                    },
+                                    "fontWeight": {
+                                      "type": "integer",
+                                      "minimum": 100,
+                                      "maximum": 900
+                                    },
+                                    "lineHeightPx": {
+                                      "type": "number",
+                                      "exclusiveMinimum": 0
+                                    },
+                                    "textAlign": {
+                                      "type": "string",
+                                      "enum": [
+                                        "left",
+                                        "center",
+                                        "right"
+                                      ]
+                                    },
+                                    "paddingTopPx": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 9007199254740991
+                                    },
+                                    "paddingRightPx": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 9007199254740991
+                                    },
+                                    "paddingBottomPx": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 9007199254740991
+                                    },
+                                    "paddingLeftPx": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 9007199254740991
+                                    }
+                                  },
+                                  "additionalProperties": false
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "const": "Divider"
+                                }
+                              },
+                              "required": [
+                                "figmaNodeId",
+                                "style",
+                                "type"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "figmaNodeId": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "style": {
+                                  "type": "object",
+                                  "properties": {
+                                    "color": {
+                                      "type": "string",
+                                      "pattern": "^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$"
+                                    },
+                                    "backgroundColor": {
+                                      "type": "string",
+                                      "pattern": "^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$"
+                                    },
+                                    "fontFamily": {
+                                      "type": "string",
+                                      "minLength": 1
+                                    },
+                                    "fontSizePx": {
+                                      "type": "number",
+                                      "exclusiveMinimum": 0
+                                    },
+                                    "fontWeight": {
+                                      "type": "integer",
+                                      "minimum": 100,
+                                      "maximum": 900
+                                    },
+                                    "lineHeightPx": {
+                                      "type": "number",
+                                      "exclusiveMinimum": 0
+                                    },
+                                    "textAlign": {
+                                      "type": "string",
+                                      "enum": [
+                                        "left",
+                                        "center",
+                                        "right"
+                                      ]
+                                    },
+                                    "paddingTopPx": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 9007199254740991
+                                    },
+                                    "paddingRightPx": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 9007199254740991
+                                    },
+                                    "paddingBottomPx": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 9007199254740991
+                                    },
+                                    "paddingLeftPx": {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 9007199254740991
+                                    }
+                                  },
+                                  "additionalProperties": false
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "const": "Html"
+                                },
+                                "html": {
+                                  "type": "string",
+                                  "minLength": 1
+                                }
+                              },
+                              "required": [
+                                "figmaNodeId",
+                                "style",
+                                "type",
+                                "html"
+                              ],
+                              "additionalProperties": false
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "required": [
+                      "figmaNodeId",
+                      "widthFraction",
+                      "blocks"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "required": [
+                "figmaNodeId",
+                "columnLayout",
+                "columns"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "figmaNodeId",
+          "rows"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "unresolved": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "figmaNodeId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "figmaNodeId",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "irVersion",
+    "figmaFileKey",
+    "figmaFileVersion",
+    "rootFigmaNodeId",
+    "widthPx",
+    "sections",
+    "unresolved"
+  ],
+  "additionalProperties": false
+}

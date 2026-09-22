@@ -1,0 +1,11 @@
+{
+  "ruleVersion": 1,
+  "componentId": "component:hero-image:1",
+  "irShapeHash": "59a63a93599ade07a465e0ab482af6e0120551c1af21584b7fe9ca6bbc1effaa",
+  "blockType": "Image",
+  "altTextSource": { "kind": "layerName" },
+  "degrade": "flattenToImage",
+  "degradeReason": "hero has a gradient over text, which cannot be expressed as live text",
+  "provenance": "handwritten",
+  "createdAt": "2026-09-21T00:00:00.000Z"
+}

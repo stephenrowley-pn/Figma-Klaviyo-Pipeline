@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gates:
+    name: Blocking gates
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install (frozen lockfile)
+        run: pnpm install --frozen-lockfile
+
+      - name: Format + lint
+        run: pnpm lint
+
+      - name: Strict typecheck
+        run: pnpm typecheck
+
+      - name: Generated-schema staleness
+        run: pnpm schema:check
+
+      - name: Tests
+        run: pnpm test -- --coverage
+
+      - name: Secret scan
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Dependency audit
+        run: pnpm audit --audit-level=high
+
+      - name: Licence allowlist
+        run: pnpm check:licenses
+
+      - name: Agent-no-write protected paths
+        if: github.event_name == 'pull_request'
+        run: pnpm guard:protected-paths
+        env:
+          BASE_REF: origin/${{ github.base_ref }}
+          HEAD_REF: HEAD

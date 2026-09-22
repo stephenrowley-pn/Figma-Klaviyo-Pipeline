@@ -1,0 +1,11 @@
+{
+  "ruleVersion": 1,
+  "componentId": "component:hero-button:1",
+  "irShapeHash": "4aca5934c488361aa6ffd90da09e8b58d7704a8ef07639adac61c22f31b85d22",
+  "blockType": "Button",
+  "textSource": { "kind": "ownCharacters" },
+  "linkSource": { "kind": "interaction" },
+  "degrade": "none",
+  "provenance": "handwritten",
+  "createdAt": "2026-09-21T00:00:00.000Z"
+}

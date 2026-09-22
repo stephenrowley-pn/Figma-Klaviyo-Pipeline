@@ -1,0 +1,45 @@
+{
+  "$comment": "GENERATED — run `pnpm schema:generate`. Do not hand-edit.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string",
+      "enum": [
+        "frame/missing-auto-layout",
+        "frame/wrong-width",
+        "node/missing-export-settings",
+        "layer/unrecognised-name",
+        "cta/missing-link",
+        "layout/overlapping-elements"
+      ]
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "error",
+        "warning"
+      ]
+    },
+    "figmaNodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "message": {
+      "type": "string",
+      "minLength": 1
+    },
+    "fixHint": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "code",
+    "severity",
+    "figmaNodeId",
+    "message",
+    "fixHint"
+  ],
+  "additionalProperties": false
+}

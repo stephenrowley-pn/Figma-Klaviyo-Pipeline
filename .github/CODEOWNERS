@@ -1,0 +1,4 @@
+# tests/ and .github/ are agent-no-write (see AGENTS.md). Any change here
+# requires a human owner's review, independent of the CI trailer guard.
+/tests/ @stephenrowley-pn
+/.github/ @stephenrowley-pn

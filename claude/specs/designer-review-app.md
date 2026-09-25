@@ -1,10 +1,22 @@
 # Spec — Designer review app (Figma plugin + Vercel web app)
 
-**Status:** Draft for review, 25 September 2026. Execute in a fresh session.
+**Status:** Approved with decisions below, 25 September 2026. Execute in a fresh session.
 **Owner:** Stephen Rowley. **Users:** the Public Nectar design team.
 **Evidence:** `prototypes/figma-eval/` (99.63% on the Strongway reference, read back from Klaviyo).
 
-## Changes to settled plan — decide before building
+## Decisions (25 September 2026)
+
+| Question | Decision |
+| --- | --- |
+| Replace the "no multi-client UI" non-goal / reshape M9 | **Approved** |
+| Downgrade `frame/missing-auto-layout` and `layout/overlapping-elements` | **Approved** — warnings, except overlap that hides live text stays an error |
+| Sign-in | **Google Workspace SSO** (via Supabase Auth) |
+| Who can "Send to Klaviyo draft" | Any signed-in designer (default; staging only, never sends) |
+| Plugin vs web app | **Web app first**; plugin later, once the org Figma plan is in place |
+| Storage | **Supabase** (Postgres + Storage), existing Public Nectar account |
+| Link convention | Pending — owner to share |
+
+## Changes to settled plan (approved above)
 
 1. `claude/build-plan.md` lists "a multi-client UI" as a v1 non-goal and M9 as a small approval
    console. This spec replaces both with a designer-facing plugin + web app. **Needs explicit sign-off.**
@@ -42,7 +54,7 @@ Designers cannot see what the pipeline understood, why it failed, or how close t
 | `apps/figma-plugin` | Figma Plugin API | Reads nodes, highlights, posts to `apps/web`. Holds no secrets. |
 | Eval worker | Headless Chromium | Vercel function size/time limits for Chromium are **unverified** — spike first; fallback is a separate container worker the web app calls. |
 | Pipeline packages | `packages/*` (M2–M8) | Rebuilt from the prototype as typed, tested modules. |
-| Storage | TBD (open question 4) | Run records, eval PNGs, rule cache (tenant-prefixed via `cacheKey()`). |
+| Storage | Supabase | Postgres: run records, rule cache (tenant-prefixed via `cacheKey()`), image hash → Klaviyo URL, rollback payloads, client config. Storage: eval PNGs. Klaviyo keys stay in the secrets manager, not the database. |
 
 ## Determinism and token cost
 
@@ -120,15 +132,12 @@ Nectar.
 
 A. Rebuild the prototype as packages (M2 figma-client → M3 normalise → M4 lint → M5 transform →
 M6 validate → M7/M8 writer + regions), with the Strongway frame as the golden fixture and a CLI.
-B. Eval worker spike (Chromium on Vercel vs container). C. `apps/web` report + send.
-D. `apps/figma-plugin`. E. Heuristic classifier, then LLM fallback (M10).
+B. Eval worker spike (Chromium on Vercel vs container). C. `apps/web` report + send, Supabase
+schema and Google SSO. D. `apps/figma-plugin` (after the org Figma plan). E. Heuristic classifier, then LLM fallback (M10).
 
 ## Open questions
 
-1. Sign-off on the two plan changes above.
-2. Sign-in: Google Workspace SSO for `apps/web`? Which designers get "Send to Klaviyo"?
-3. Figma plan tier: can the org publish a private plugin? (unverified)
-4. Storage: Vercel Postgres + Blob, or something Public Nectar already runs?
-5. Link source convention for designers: Figma hyperlink on the text (recommended) vs layer-name
-   suffix vs campaign sheet.
-6. Which clients after Strongway, and does each have a separate staging Klaviyo account?
+1. Link source convention for designers (owner to share): Figma hyperlink on the text
+   (recommended) vs layer-name suffix vs campaign sheet.
+2. Which clients after Strongway, and does each have a separate staging Klaviyo account?
+3. Eval worker: Chromium on Vercel or a container (resolved by the build-order step B spike).

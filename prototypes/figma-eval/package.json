@@ -1,0 +1,11 @@
+{
+  "name": "figma-eval-prototype",
+  "private": true,
+  "type": "module",
+  "description": "Reference prototype: Figma frame -> USER_DRAGGABLE HTML + fidelity eval. Not production code.",
+  "dependencies": {
+    "pixelmatch": "^7.2.0",
+    "playwright": "^1.63.0",
+    "pngjs": "^7.0.0"
+  }
+}

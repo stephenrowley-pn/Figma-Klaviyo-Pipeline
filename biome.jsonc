@@ -44,6 +44,19 @@
   },
   "overrides": [
     {
+      // Reference prototype: plain .mjs evidence, rebuilt as typed packages. See its README.
+      "includes": ["**/prototypes/**"],
+      "assist": {
+        "enabled": false
+      },
+      "formatter": {
+        "enabled": false
+      },
+      "linter": {
+        "enabled": false
+      }
+    },
+    {
       "includes": ["**/packages/contracts/schema/**"],
       "formatter": {
         "enabled": false

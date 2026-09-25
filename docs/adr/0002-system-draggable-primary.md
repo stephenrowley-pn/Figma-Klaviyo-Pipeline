@@ -1,6 +1,17 @@
 # ADR 0002 — `SYSTEM_DRAGGABLE` is the primary output, `CODE` is the fallback
 
-**Status:** Accepted
+**Status:** Superseded by [ADR 0005](0005-user-draggable-primary.md)
+
+This ADR's reasoning (only DND satisfies both "1:1 fidelity" and "editable
+afterwards") turned out to rest on an unstated assumption: that
+`SYSTEM_DRAGGABLE`'s block model can represent everything the design needs,
+including an inline link on one word inside a paragraph. Validating the IR
+against a real client file surfaced a concrete case (an unsubscribe link
+inside a footer sentence) where our own `Block.Text` couldn't carry that,
+and Klaviyo's DND rich-text format for it was never actually confirmed. See
+ADR 0005 for the replacement decision. Left in place, unedited below, as the
+record of what was decided and why — including the two once-rejected
+alternatives, one of which we now use.
 
 ## Context
 

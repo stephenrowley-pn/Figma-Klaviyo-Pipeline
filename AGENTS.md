@@ -15,16 +15,18 @@ doc. Current plan: `claude/build-plan.md`. Current state:
 `claude/m0-m1-status.md`. Settled decisions with rejected alternatives:
 `docs/adr/`.
 
-## Settled — do not re-litigate (see ADRs 0001–0002)
-- Compiler, not generator. Figma nodes → typed DesignIR → MJML/Klaviyo
-  `definition`. Same design must produce byte-identical output every run.
+## Settled — do not re-litigate (see ADRs 0001, 0003–0005)
+- Compiler, not generator. Figma nodes → typed DesignIR → hand-written HTML.
+  Same design must produce byte-identical output every run.
 - The LLM's only job is component-level semantic classification, intent
   extraction from layer names, degradation decisions and alt text. It emits
   small structured `MappingRule` objects into a content-addressed cache keyed
-  by Figma `componentId`. It never emits markup, HTML, geometry, colour
-  values or the `definition` object.
-- `SYSTEM_DRAGGABLE` is the primary output; `CODE` is an explicit fallback,
-  and the UI must say which one a design produced.
+  by Figma `componentId`. It never emits markup, HTML, geometry or colour
+  values.
+- `USER_DRAGGABLE` is the primary output (hand-written HTML with
+  `data-klaviyo-region` editable regions); `CODE` is the fallback for
+  designs needing no editable surface. `SYSTEM_DRAGGABLE` is not used —
+  see ADR 0005.
 - Design-file linting is a feature. Failures read "fix your Figma file", not
   "wrong email".
 - The pipeline terminates at draft. Sending is always a human action.

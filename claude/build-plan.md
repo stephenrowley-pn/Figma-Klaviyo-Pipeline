@@ -11,6 +11,10 @@ confirmed to support. Every `SYSTEM_DRAGGABLE`/`definition` reference below
 is superseded by that ADR; this file hasn't been fully rewritten to match
 yet, and neither has the canonical artifact above.
 
+**Proposed direction (25 Sep 2026, awaiting sign-off):** a designer-facing Figma
+plugin + Vercel web app replaces the "no multi-client UI" non-goal and reshapes
+M9 — see `claude/specs/designer-review-app.md`.
+
 ---
 
 ## Definition of done (v1)
@@ -133,8 +137,10 @@ reviewed as a separate artefact. Comprehension artefact required on Tier 1/2 PRs
    signature, not by convention.
 8. Stale approval overwrites a client edit → re-read and re-diff at execute.
 
-**Unverified, test before relying on:** `{% unsubscribe_link %}` (absent from
-Klaviyo's primary Templates docs); whether `{% unsubscribe %}` is actually
+**Verified 25 Sep 2026 (render API, staging account):** `{% unsubscribe_link %}`
+renders to Klaviyo's `[unsubscribe_tag]` URL and keeps the enclosing `<a>`'s
+inline styles; `{% unsubscribe_url %}` is not a valid tag (400). Details in
+`prototypes/figma-eval/README.md`. **Still unverified:** whether `{% unsubscribe %}` is actually
 required. Also undocumented: any byte-size limit on template `html`; whether
 Klaviyo sanitises `<style>` or media queries in `CODE` templates; the exact UTM
 exclusion list; API revision support window.

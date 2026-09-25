@@ -1,0 +1,12 @@
+# Client design data and generated output: never commit.
+data/
+layers/*.png
+fonts/
+spec.json
+bb.json
+rb.json
+cdn.json
+asset-map.json
+out/
+rollback/
+node_modules/

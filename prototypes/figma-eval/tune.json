@@ -1,0 +1,10 @@
+{
+  "8485:12388": { "title": 1, "gap": 7.5, "lhTitle": 30, "lhBody": 22 },
+  "8485:12392": { "title": 1, "gap": 7.5, "lhTitle": 30, "lhBody": 22 },
+  "8485:12396": { "title": 1, "gap": 7.5, "lhTitle": 30, "lhBody": 22 },
+  "8485:12384": { "top": -6, "lh": 44 },
+  "8485:12386": 1,
+  "tile": { "dy": 1, "dx": 2.6 },
+  "usp": { "title": 1, "sub": 0, "border": "rgba(0,0,0,0.5)" },
+  "footer": { "url": 1, "legal": 1, "legalLh": 17 }
+}

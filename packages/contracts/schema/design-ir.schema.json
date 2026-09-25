@@ -144,15 +144,32 @@
                                   "type": "string",
                                   "const": "Text"
                                 },
-                                "text": {
-                                  "type": "string"
+                                "runs": {
+                                  "minItems": 1,
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "text": {
+                                        "type": "string"
+                                      },
+                                      "href": {
+                                        "type": "string",
+                                        "format": "uri"
+                                      }
+                                    },
+                                    "required": [
+                                      "text"
+                                    ],
+                                    "additionalProperties": false
+                                  }
                                 }
                               },
                               "required": [
                                 "figmaNodeId",
                                 "style",
                                 "type",
-                                "text"
+                                "runs"
                               ],
                               "additionalProperties": false
                             },

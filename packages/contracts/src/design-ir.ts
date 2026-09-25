@@ -40,9 +40,26 @@ const BlockBaseSchema = z.object({
   style: BlockStyleSchema,
 });
 
+/**
+ * One run of text within a `Text` block, with an optional link on just that
+ * run. Figma gives us this via `styleOverrideTable` — a link on one word
+ * inside a paragraph (the unsubscribe link inside a footer sentence is the
+ * canonical case) — and a flat `text: string` cannot represent it. A
+ * `Text` block with a single unlinked run is the common case and still
+ * round-trips as plain text.
+ */
+const TextRunSchema = z
+  .object({
+    text: z.string(),
+    href: OutboundUrlSchema.optional(),
+  })
+  .strict();
+
+export type TextRun = z.infer<typeof TextRunSchema>;
+
 const TextBlockSchema = BlockBaseSchema.extend({
   type: z.literal("Text"),
-  text: z.string(),
+  runs: z.array(TextRunSchema).min(1),
 }).strict();
 
 const ImageBlockSchema = BlockBaseSchema.extend({

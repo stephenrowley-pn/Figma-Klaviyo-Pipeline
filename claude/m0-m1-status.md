@@ -3,6 +3,15 @@
 **Date:** 22 September 2026
 **Branch:** `claude/wizardly-meitner-787rde`.
 
+**Post-M1 correction (25 September 2026, see ADR 0005):** validating
+`DesignIR` against a real client file (Strongway Gym) surfaced that
+`Block.Text` couldn't represent a link on one word inside a paragraph — the
+exact shape an unsubscribe link needs. `Block.Text` changed from
+`{ text: string }` to `{ runs: TextRun[] }`, `TextRun` being
+`{ text, href? }`. Same change also dropped `SYSTEM_DRAGGABLE` as the
+primary output in favour of `USER_DRAGGABLE`. The four-contracts and
+six-fixtures description below is otherwise unchanged and still accurate.
+
 **Note on provenance:** an earlier claude.ai project session did this same
 M0+M1 work and described it in this file, but delivered it as a git bundle
 because that session's repo access wasn't authorised — the bundle was never

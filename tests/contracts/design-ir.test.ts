@@ -23,7 +23,7 @@ const validDesignIR = {
                   type: "Text",
                   figmaNodeId: "1:5",
                   style: {},
-                  text: "Hello",
+                  runs: [{ text: "Hello" }],
                 },
               ],
             },
@@ -96,5 +96,46 @@ describe("BlockSchema", () => {
       heightPx: 100,
     });
     expect(image.type).toBe("Image");
+  });
+
+  // A Text block is one or more runs, and one run in the middle of a
+  // paragraph can carry its own link — this is what an inline hyperlink
+  // from Figma's styleOverrideTable (e.g. an unsubscribe link inside a
+  // footer sentence) actually needs, and a flat `text: string` could not
+  // represent.
+  it("accepts a Text block with a link on one run in the middle of a paragraph", () => {
+    const block = BlockSchema.parse({
+      type: "Text",
+      figmaNodeId: "1:5",
+      style: {},
+      runs: [
+        { text: "No longer want to hear from us? " },
+        { text: "Unsubscribe", href: "https://cdn.example.com/unsubscribe" },
+        { text: ". Terms and conditions apply." },
+      ],
+    });
+    expect(block.type === "Text" && block.runs).toHaveLength(3);
+  });
+
+  it("rejects a Text block with no runs", () => {
+    expect(() =>
+      BlockSchema.parse({
+        type: "Text",
+        figmaNodeId: "1:5",
+        style: {},
+        runs: [],
+      }),
+    ).toThrow();
+  });
+
+  it("rejects a Text run whose href is a figma.com URL", () => {
+    expect(() =>
+      BlockSchema.parse({
+        type: "Text",
+        figmaNodeId: "1:5",
+        style: {},
+        runs: [{ text: "Unsubscribe", href: "https://figma.com/whoops" }],
+      }),
+    ).toThrow();
   });
 });

@@ -4,22 +4,29 @@
 **Canonical, editable version:** https://claude.ai/code/artifact/e9351425-a2c2-4570-a6b9-d67f09d4737d
 This file is the copy a fresh session should read. If the two disagree, the living doc wins.
 
+**Post-M1 update (see ADR 0005):** the primary output changed from
+`SYSTEM_DRAGGABLE` to `USER_DRAGGABLE` after validating `DesignIR` against a
+real client file surfaced an inline-link case the DND block model was never
+confirmed to support. Every `SYSTEM_DRAGGABLE`/`definition` reference below
+is superseded by that ADR; this file hasn't been fully rewritten to match
+yet, and neither has the canonical artifact above.
+
 ---
 
 ## Definition of done (v1)
 
-One linted Figma frame becomes a `SYSTEM_DRAGGABLE` Klaviyo template in a
+One linted Figma frame becomes a `USER_DRAGGABLE` Klaviyo template in a
 **staging** account, with a draft campaign and a proof sent — and a second run
-of the same unchanged frame produces a byte-identical `definition` and performs
+of the same unchanged frame produces byte-identical HTML and performs
 **zero** writes.
 
 ### Non-goals for v1
 
 Sending (permanently out of scope). Flows, forms, segments, catalogues, SMS,
 push. Arbitrary Figma files — unlinted files are rejected with findings, not
-best-efforted. `USER_DRAGGABLE`. Litmus/Email on Acid Tier 3 screenshots.
-Figma Variables (Enterprise-only REST API). A multi-client UI. Template
-garbage collection.
+best-efforted. `SYSTEM_DRAGGABLE` (see ADR 0005). Litmus/Email on Acid Tier 3
+screenshots. Figma Variables (Enterprise-only REST API). A multi-client UI.
+Template garbage collection.
 
 Designed for from M1 even though unused in v1: `tenant_id` on every cache key,
 per-client keys, and `(run_id, target_object, field_hash)` idempotency keys.
@@ -71,8 +78,8 @@ Full Zod sketches are in the living doc.
 | M4 | Design-file linter + findings UI copy | `packages/lint/` | A deliberately broken fixture produces the exact expected `LintFinding[]` |
 | M5 | Transform: IR + rules → MJML → post-processed HTML. A11y + dark mode injected | `packages/transform/` | 100 runs, one hash. No I/O reachable from the module |
 | M6 | Validation: Tier 1 static lint, Tier 2 pixel diff vs Figma, masked per `figma_node_id` | `packages/validate/` | Pinned browser; diff ratio ≤ 0.02 at 600px and 375px |
-| M7 | Klaviyo writer: content-addressed images → `CODE` template → draft campaign → proof. Staging only, dry-run default | `packages/klaviyo-writer/` | Second run of unchanged input performs zero writes; rollback stored before any `PATCH` |
-| M8 | `SYSTEM_DRAGGABLE` `definition` emitter, `CODE` declared fallback, UI states which | `packages/klaviyo-dnd/` | Write then read back with `additional-fields[template]=definition`, structural equality |
+| M7 | Klaviyo writer: content-addressed images → `USER_DRAGGABLE` template → draft campaign → proof. Staging only, dry-run default | `packages/klaviyo-writer/` | Second run of unchanged input performs zero writes; rollback stored before any `PATCH` |
+| M8 | `data-klaviyo-region` emitter marking which blocks are editable, `CODE` declared fallback for anything needing none, UI states which | `packages/klaviyo-regions/` | Write then read back, region markers survive Klaviyo's own save round-trip |
 | M9 | Approval UI: three-up panes, field-level from/to diff, durable wait, re-validate on execute | `apps/console/` | Approval older than the live template's `updated` bounces to re-review |
 | M10 | LLM resolve at component level, emitting `MappingRule` into the cache | `packages/resolve/` | Handwritten and LLM rules produce identical output on the reference design |
 | M11 | Multi-tenant hardening + eval harness from real failures | `packages/gateway/`, `evals/` | A missing tenant prefix fails a test, not a review |
@@ -91,7 +98,7 @@ No date estimates. Milestone count is the honest unit.
 | Invariant | Shape | Command |
 | --- | --- | --- |
 | Transform pure and deterministic | 100 runs → one hash | `pnpm test:property --filter transform` |
-| IR ↔ `definition` round-trip | `parse ∘ serialise = id` | `pnpm test:property --filter dnd-roundtrip` |
+| IR ↔ HTML region markers round-trip | `parse ∘ serialise = id` | `pnpm test:property --filter region-roundtrip` |
 | Publish idempotent | `publish ∘ publish = publish` | `pnpm test:integration --filter publish --env staging` |
 | Link count in = out | Invariant vs Figma link map | `pnpm test --filter linkmap` |
 | Merge tags survive generation | Golden byte comparison | `pnpm test:golden --filter mergetags` |
@@ -108,9 +115,11 @@ reviewed as a separate artefact. Comprehension artefact required on Tier 1/2 PRs
 
 ## Top risks
 
-1. `SYSTEM_DRAGGABLE` cannot express the client's designs → the primary output
-   becomes the fallback and "editable afterwards" dies. Track the DND/CODE ratio
-   as a product metric from M8.
+1. ~~`SYSTEM_DRAGGABLE` cannot express the client's designs~~ — moot, see
+   ADR 0005. Successor risk: `USER_DRAGGABLE` regions turn out coarser than
+   the small-edit requirement needs, or Klaviyo's editor doesn't treat
+   `klaviyo-text-block` content as rich text in practice. Verify at M8;
+   track the `USER_DRAGGABLE`/`CODE` ratio as a product metric.
 2. Real client Figma files fail the linter en masse → run the linter against
    real files at **M4**, before building anything downstream of it.
 3. Klaviyo 1,000-template cap → update in place, mapping table on content hash,
